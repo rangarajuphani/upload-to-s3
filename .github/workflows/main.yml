@@ -1,0 +1,12 @@
+name: uploadtos3
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Release to S3
+      run: bash scripts/pipeline/release.sh "phani-contino" "nltk/package_nltk.zip" ${{secrets.AWS_ACCESS_KEY}} ${{secrets.AWS_SECRET_ACCESS_KEY}} "package_nltk.zip"
